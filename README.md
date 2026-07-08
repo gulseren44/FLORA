@@ -1,7 +1,7 @@
 🚀 Projeyi Çalıştırma Rehberi (How to Run):
 Bu projeyi yerelinizde çalıştırmak için ana dizini (Flora) klonladıktan sonra aşağıdaki adımları takip edebilirsiniz:
 
-1. Backend (Spring Boot) Çalıştırma
+1. Backend (Spring Boot) Çalıştırma: 
 Projeyi en dış dizinden (Flora/) açtıysanız, Maven bağımlılıklarının ve klasör yollarının doğru çözülmesi için backend servisini iki farklı şekilde ayaklandırabilirsiniz:
 
 Yöntem A (Doğrudan Ana Dizinden): Alt klasöre geçiş yapmadan, ana dizindeki terminalden Maven parametresiyle tetikleyebilirsiniz:
@@ -21,7 +21,7 @@ cd backend
 
 💡 Not: Backend servisinin log-trace korelasyonunu (Loki & Tempo entegrasyonu) anlık izleyebilmek için yerelinizde Docker Desktop'ın açık ve docker-compose.yml dosyasının ayaklandırılmış olması gerekmektedir.
 
-2. Frontend Çalıştırma
+2. Frontend Çalıştırma: 
 Ana dizinden frontend terminaline geçiş yaparak statik dosyalarınızı yerel bir sunucuyla veya doğrudan tarayıcı üzerinden açabilirsiniz:
 
 ```bash
