@@ -1,4 +1,4 @@
-🚀 Projeyi Çalıştırma Rehberi (How to Run)
+🚀 Projeyi Çalıştırma Rehberi (How to Run):
 Bu projeyi yerelinizde çalıştırmak için ana dizini (Flora) klonladıktan sonra aşağıdaki adımları takip edebilirsiniz:
 
 1. Backend (Spring Boot) Çalıştırma
