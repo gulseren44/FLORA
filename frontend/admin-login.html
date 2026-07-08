@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Yönetici Girişi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-container" style="max-width: 400px; margin: 100px auto; padding: 20px; font-family: sans-serif; border: 1px solid #ddd; border-radius: 8px;">
+        <h2 style="text-align: center; color: #2e7d32;">🌿 Flora Yönetici Girişi</h2>
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Sistem yönetici bilgilerini giriniz.</p>
+        
+        <form id="admin-login-form">
+            <div class="input-group" style="margin-bottom: 15px;">
+                <label for="admin-username" style="display:block; margin-bottom:5px;">Kullanıcı Adı</label>
+                <input type="text" id="admin-username" required placeholder="admin" style="width:100%; padding:8px; box-sizing:border-box;">
+            </div>
+            <div class="input-group" style="margin-bottom: 20px;">
+                <label for="admin-password" style="display:block; margin-bottom:5px;">Şifre</label>
+                <input type="password" id="admin-password" required placeholder="••••••••" style="width:100%; padding:8px; box-sizing:border-box;">
+            </div>
+            <button type="submit" style="width:100%; padding:10px; background:#1b5e20; color:white; border:none; cursor:pointer; font-weight: bold;">Sisteme Giriş Yap</button>
+        </form>
+        <p style="text-align:center; margin-top:15px;"><a href="index.html" style="color:#666; text-decoration:none;">← Mağazaya Dön</a></p>
+    </div>
+
+    <script src="admin-auth.js"></script>
+</body>
+</html>

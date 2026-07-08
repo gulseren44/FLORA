@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  # 1. GRAFANA - Metrik, Log ve Tracing verilerini görselleştireceğimiz panel
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: flora-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - flora-network
+
+  # 2. PROMETHEUS - Uygulamanın ürettiği metrikleri (CPU, RAM, istek sayısı) çeken veri tabanı
+  prometheus:
+    image: prom/prometheus:v2.47.0
+    container_name: flora-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - flora-network
+
+  # 3. LOKI - Uygulama loglarını toplayan merkez
+  loki:
+    image: grafana/loki:2.9.1
+    container_name: flora-loki
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - flora-network
+
+  # 4. TEMPO - OpenTelemetry traces (istek izleme) verilerini toplayan canavar
+  tempo:
+    image: grafana/tempo:2.2.3
+    container_name: flora-tempo
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./tempo.yaml:/etc/tempo.yaml
+    ports:
+      - "3200:3200"    # tempo http
+      - "4317:4317"    # otlp grpc ingest
+      - "4318:4318"    # otlp http ingest (Spring Boot buraya gönderecek)
+    networks:
+      - flora-network
+
+  # 5. PROMTAIL - Logları yakalayıp Loki'ye taşıyan kurye
+  promtail:
+    image: grafana/promtail:2.9.1
+    container_name: flora-promtail
+    volumes:
+      - ./promtail-config.yaml:/etc/promtail/config.yaml
+      # Spring Boot projenin log klasörünü promtail'e bağlıyoruz
+      - ./logs:/var/log/backend
+    command: -config.file=/etc/promtail/config.yaml
+    networks:
+      - flora-network
+      
+volumes:
+  grafana-storage:
+
+networks:
+  flora-network:
+    driver: bridge

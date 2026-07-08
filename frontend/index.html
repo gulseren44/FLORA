@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Ana Sayfa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home.css"> 
+</head>
+<body>
+
+    <header class="navbar container">
+    <a href="index.html" class="logo">FLORA</a>
+    <nav>
+        <a href="index.html" class="nav-home-link">Ana Sayfa</a>
+    </nav>
+    <div class="nav-right-group">
+        <div class="nav-icons">
+            <span onclick="window.location.href='cart.html'" style="cursor:pointer;" class="cart-icon-wrapper">
+                🛒<mark class="cart-badge" id="global-cart-count">0</mark>
+            </span>
+        </div>
+        <div class="nav-links">
+            <div id="nav-auth-wrapper">
+                <a href="login.html" id="nav-login-btn" class="nav-btn login-btn">Giriş Yap</a>
+                <span id="nav-user-profile" style="display: none;" class="user-profile-box">
+                    <span class="welcome-text">👋 Hoş geldin, <strong id="nav-username-span"></strong></span>
+                    <!-- Çıkış linkini şık bir butona çevirdik -->
+                    <button id="nav-logout-btn" class="logout-btn">Çıkış Yap</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main class="container">
+        <section class="hero-section">
+            <div class="hero-text">
+                <span class="sub-title">ÖZEL SEÇKİ</span>
+                <h1>Doğayı Yaşam Alanınıza <i>Flora</i> ile Davet Edin</h1>
+                <p>Bahara hazırlık koleksiyonumuz, şehrin merkezinde kendi vahanızı yaratmanız için kürate edildi. Nadir türlerden başlangıç seviyesi bitkilere kadar her zevke uygun seçenekler burada.</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1545241047-6083a3684587?q=80&w=600" alt="Flora">
+            </div>
+        </section>
+
+        <section class="search-section" style="display: flex; flex-direction: column; gap: 15px; background: #fdfbf7; padding: 20px; border-radius: 8px; border: 1px solid #e1dbd2; margin-bottom: 30px;">
+            <div style="display: flex; gap: 15px; width: 100%; flex-wrap: wrap;">
+                <div class="search-bar-wrapper" style="flex: 1; min-width: 250px;">
+                    <input type="text" id="global-search-input" placeholder="Flora koleksiyonunda ara...">
+                </div>
+                <button class="filter-all-btn" id="filter-clear-btn" style="background: #2e7d32; color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">Tümü</button>
+            </div>
+            
+            <div class="price-filters-wrapper" style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; font-size: 14px; color: #2c3e50; padding-top: 5px;">
+                <span style="font-weight: bold; color: #2e7d32;">Fiyat Aralığı:</span>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="price-filter" value="all" checked style="accent-color: #2e7d32;"> Tüm Ürünler
+                </label>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="price-filter" value="0-100" style="accent-color: #2e7d32;"> 0 - 100 TL
+                </label>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="price-filter" value="100-300" style="accent-color: #2e7d32;"> 100 - 300 TL
+                </label>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="price-filter" value="300-400" style="accent-color: #2e7d32;"> 300 - 400 TL
+                </label>
+                <label style="cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                    <input type="radio" name="price-filter" value="400plus" style="accent-color: #2e7d32;"> 400 TL ve Üzeri
+                </label>
+            </div>
+        </section>
+
+        <section class="categories-section">
+            <div class="section-header">
+                <h2>Flora Dünyasını Keşfedin</h2>
+                <p>Yaşam alanınıza en uygun bitkiyi seçin.</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" data-category="ic-mekan" style="background-image: linear-gradient(to top, rgba(0,0,0,0.4), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNv2XH7SCL5_HE_fiTCZwH9SatqBwdTW0bAl_IkmeDLDLaq1ButgROHcMMo4_0o89anQSf6qo8ikd1XfjHR-hQ30r79CVREMRIkizoO-cqJDFJ5BN6icQ0vs-ycQhOXiyFz8GTc8W7yn6iCqe2mnSw2N0-Kx89IlPQWqGUBy9w06EuhAYcofGo0DmyDUUNUIwOUbYOfaqehROJnPcvftFMbG2jCZ-RedjX79ZzCFzIz-HghRByP-S4')"><span>İç Mekan</span></div>
+                <div class="category-card" data-category="dis-mekan" style="background-image: linear-gradient(to top, rgba(0,0,0,0.4), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuAa-KI1b0Cfn-B7HBS3T8lC2z_hizl5MmoJuplE5Q3DHxy_e9PkxBq5NCSoEaX328jYoLeH8Ad_hUv5q_7iEKwnA_S4Rh6VEleZU6rFiSBjXqGR5cegTMSQ4f8BFFv79lv4z7Jrjgky_loXawDnmnyV9UFieFFLHrkDbpA_B3-kVaslDyXULIuJTSuXHLM8WN-KmLSJse3qgT8Zj9oiFaqm__9sECkfZzx_gFSIKFJwjtcvMvlW4Qc9')"><span>Dış Mekan</span></div>
+                <div class="category-card" data-category="sukulent" style="background-image: linear-gradient(to top, rgba(0,0,0,0.4), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuA8-eETkMFgqSHFJlKlhQDmbX-kA4J1wNKuQSzZRKPNPvOaa77OtiC9IlrCMLoNMH-jkDdGSglwQov3pVGjqrkquQCHmC-kSCuAlqdFxJiK2ZrbQMf7zFeTwZ5nMFyEaUMRpHEIhPG-omRxxG6ddOTxSKDAtk7diULxNp-Es2NUaIX2bPe4cn5ddImGxiKr40aH3duinaSfN5tReIGfRWx6qiEj34SdaiV8m6ZkgpH6tr1IRKPRTlqE')"><span>Sukulent</span></div>
+                <div class="category-card" data-category="aksesuar" style="background-image: linear-gradient(to top, rgba(0,0,0,0.4), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7fvDgA66aZbgrD3lGM4LQFxXYMNKY1cOghmmCSvtMJW1fvRpoMALT2iskQznnsWTy5o9ikoIIxEnGYRoP5WL4uPyswqBXb4PYa3DfjFzaxekerjAcwexFUcjXCtMX_e_asi7g0q2Mgdrzh6B3edZhUr2ZlXwVk5UyCZEzQJQZlpEnVK6eFo6lsO9JoovM0baZ6w63YFzB9tE6wi0EwGX8ZjO4VamywluO3HPuB7UbGn4fGs79-Y3h')"><span>Aksesuarlar</span></div>
+            </div>
+        </section>
+        
+        <section class="favorites-section" id="filter-results-section" style="display: none; border-bottom: 2px dashed #E8EEDF; padding-bottom: 40px; margin-bottom: 40px;">
+            <div class="section-header">
+                <h2 id="filter-title">Filtre Sonuçları</h2>
+                <p id="filter-desc">Aradığınız kriterlere uygun ürünler listeleniyor.</p>
+            </div>
+            <div class="products-container-flex" id="filter-products-wrapper"></div>
+        </section>
+
+        <section class="favorites-section">
+            <div class="section-header">
+                <h2>Flora Favorileri</h2>
+                <p>Bu ayın en çok tercih edilen bitkileri.</p>
+            </div>
+            <div class="products-container-flex">
+                <div class="featured-product-card" onclick="window.location.href='detail.html'">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpbfzgWCwdQOVWdLn8BUlyUu6gBHJBNL42c-5ZhyYiJAVJ-8hhCc0iptvhHphrslbIvtJys5mSe_lHwTogOeDkc_sahYp_QyXIZaRnT1FQcS-owfh0IZXqrdNQOqWpqkqwNDPlIUo_DVKBtzG6sz2LwY3GFbavtcxXUHb1OQxOQj9SIS5_TvAVwARxsibLFsT_rujMEOQzrSamh3oZMGO61lFpFr5eZy5Bovdh1-JwcBlaxasr7oMc" alt="Lirata">
+                    <div class="featured-details">
+                        <span class="badge">AYIN SEÇİMİ</span>
+                        <h3>Lirata (Fiddle Leaf)</h3>
+                        <p class="scientific">Ficus Lyrata • Orta Işık</p>
+                        <p class="desc">Salonunuzun yıldızı olmaya aday, heybetli ve...</p>
+                        <div class="card-footer">
+                            <span class="price">₺850,00</span>
+                            <button class="add-to-cart-circle">🛒</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="small-products-grid">
+                    <div class="small-card" onclick="window.location.href='detail.html'">
+                        <div class="img-wrapper"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF3tCmYGp6cxxlR5qglUlmFSdVayWH__qqsO0Xz3jZfqjwpevZALXWovzLDuW3cHk1aiwgjiI_GpOOKHcxlqVoWFXvalwnpdiFoEiH7o4H2yG408FKCKKUvJvf7azYeo5EQXliRPlLVe8bU7gPmE35FKzBD1gBPTEUJVHmPrC5TUzTg9re-xeoBmVJz_xyvi7rPzd8dQeQ2saZtmn3k3GMrfBvf-md6TLeQKZGRsOEUnpzO_9YIKhS"></div>
+                        <h4>Calathea Orbifolia</h4>
+                        <p class="price">₺420,00</p>
+                    </div>
+                    <div class="small-card" onclick="window.location.href='detail.html'">
+                        <div class="img-wrapper"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVtTUsQYPKJbdpGpSeZfrticpCDkjXph562vymrFj0q1M49CV93BPOYCdl5gNuO-zGvVYcY5xnhSluTvTlK6EeXiqM3QFeh_JPT4-mfPn1L0WKh3pgW89vIdi1Soy2DopXN7714LJli8vYG9Kw4swV0XTVrrGg0rp-CIewdYZr7t8p17d_PbR1vGF6mPRMSILCx092HYS1aXJB7rObIx22ipiIR_NKkKs0NjJ0VEAEpgV-VLzwCXWO"></div>
+                        <h4>Paşa Kılıcı</h4>
+                        <p class="price">₺290,00</p>
+                    </div>
+                    <div class="small-card" onclick="window.location.href='detail.html'">
+                        <div class="img-wrapper"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuATpewyWMr44eLoCie3VZt3-G8nyQQgwssRPcDgoRS2-oy5aQgjePSfD6FGsh6isL0w6HJP78LoALmMY3Ys57tPnVnDrHD8gaCatqxoeiq7kWHyxo06cNHo5F-kqqI5Mg7lGZFEZyepSBTAzVHdFk_I3GOG8xjbPGdkXvO7dni7cK_yuD2NX8suR2iyjicIC4DcVVOm2LmKs_mckt0dNV4_vznk5tXZnlFKwBGE3LzOSWuYM0VwWOsH"></div>
+                        <h4>Marble Queen Pothos</h4>
+                        <p class="price">₺340,00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

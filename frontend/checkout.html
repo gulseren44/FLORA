@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Ödeme</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+
+    <header class="navbar container">
+        <a href="index.html" class="logo">FLORA</a>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+        </nav>
+        <div class="nav-icons">
+            <span onclick="window.location.href='cart.html'" style="cursor:pointer;">🛒<mark class="cart-badge" id="global-cart-count">0</mark></span>
+        </div>
+    </header>
+
+    <main class="container checkout-container">
+        <div class="checkout-layout">
+            
+            <div class="checkout-form-side">
+                <h2>Teslimat & Ödeme Bilgileri</h2>
+                
+                <form id="checkout-form">
+                    <div class="form-section">
+                        <h3>1. İletişim Bilgileri</h3>
+                        <div class="input-group">
+                            <input type="email" id="checkout-email" placeholder="E-posta Adresi" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>2. Teslimat Adresi</h3>
+                        <div class="input-row">
+                            <input type="text" id="checkout-firstname" placeholder="Ad" required>
+                            <input type="text" id="checkout-lastname" placeholder="Soyad" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="checkout-address" placeholder="Açık Adres" required>
+                        </div>
+                        <div class="input-row">
+                            <input type="text" id="checkout-city" placeholder="Şehir" required>
+                            <input type="text" id="checkout-district" placeholder="İlçe" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>3. Kart Bilgileri</h3>
+                        <div class="input-group">
+                            <input type="text" id="checkout-cardname" placeholder="Kart Üzerindeki İsim" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="checkout-cardnumber" maxlength="16" placeholder="Kart Numarası (0000000000000000)" required>
+                        </div>
+                        <div class="input-row">
+                            <input type="text" id="checkout-cardexpiry" placeholder="AA / YY" maxlength="5" required>
+                            <input type="password" id="checkout-cardcvc" placeholder="CVC" maxlength="3" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="checkout-summary-side">
+                <div class="order-summary-box">
+                    <h3>Siparişiniz</h3>
+                    
+                    <div class="checkout-items-preview" id="checkout-items-preview">
+                        <p>Sipariş özeti yükleniyor...</p>
+                    </div>
+
+                    <hr class="summary-divider">
+                    
+                    <div class="summary-row">
+                        <span>Ara Toplam</span>
+                        <span id="checkout-subtotal">₺0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Kargo</span>
+                        <span style="color: #7C8E6C; font-weight: bold;">Ücretsiz</span>
+                    </div>
+                    
+                    <hr class="summary-divider">
+                    
+                    <div class="summary-row total-row">
+                        <span>Toplam</span>
+                        <span id="checkout-total">₺0.00</span>
+                    </div>
+
+                    <button type="submit" form="checkout-form" class="btn-dark btn-submit-order" id="complete-order-btn">
+                        SİPARİŞİ TAMAMLA
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="checkout.js"></script>
+</body>
+</html>

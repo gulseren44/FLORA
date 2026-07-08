@@ -1,0 +1,214 @@
+/* Tasarımdaki Renk Paleti ve Değişkenler */
+:root {
+    --primary: #7C8E6C;
+    --secondary: #A670A1;
+    --bg-light: #F8F9F6; /* Görsellerdeki temiz açık arka plan */
+    --text-main: #160E16;
+    --text-muted: #757A75;
+    --border-color: #E8EEDF;
+    --button-dark: #1C2E1A; /* Görseldeki koyu yeşil buton rengi */
+    --button-text: #FFFFFF;
+    --badge-bg: #EAF2E3; /* "Ayın Seçimi" gibi etiketlerin arka planı */
+    --badge-text: #4A6B46;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Playfair Display', 'Segoe UI', serif; /* Başlıklar için şık font */
+}
+
+body {
+    background-color: #FFFFFF;
+    color: var(--text-main);
+}
+
+/* Standart Yazı Tipleri Ayarı */
+h1, h2, h3, .logo { font-family: 'Playfair Display', serif; }
+p, span, button, input, a { font-family: 'Segoe UI', sans-serif; }
+
+/* Global Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+    background-color: #F8F9F6;
+}
+
+.navbar .logo {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-decoration: none;
+    color: var(--button-dark);
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: var(--text-main);
+    margin: 0 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-icons span {
+    cursor: pointer;
+    font-size: 18px;
+    position: relative;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 50%;
+}
+
+/* Genel Konteyner */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Ortak Buton Yapısı */
+.btn-dark {
+    background-color: var(--button-dark);
+    color: var(--button-text);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-dark:hover {
+    background-color: var(--primary);
+}
+/* --- MODERN VE NEFES ALAN NAVBAR STİLLERİ --- */
+.navbar.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px;          /* Yukarı-aşağı boşluğu 25px yaptık, derinlik kazandı */
+    margin: 15px auto 30px auto; /* Üstten 15px indirdik, alt kısımdan 30px uzaklaştırdık */
+    background: #ffffff;
+    border-radius: 16px;         /* Hafif yumuşatılmış modern köşeler */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.20); /* Altına çok hafif, elit bir gölge */
+    max-width: 1200px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Sağ taraftaki sepet ve profil gruplarını yan yana hizala */
+.nav-right-group {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* Logo Stili */
+.navbar .logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #1C2E1A;
+    text-decoration: none;
+}
+
+/* Ana Sayfa Linki */
+.nav-home-link {
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+.nav-home-link:hover {
+    color: #2e7d32;
+}
+
+/* Sepet İkonu ve Badge */
+.cart-icon-wrapper {
+    font-size: 20px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Giriş Yap / Profil Alanı Kutusu */
+.user-profile-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f4f7f4;
+    padding: 6px 14px;
+    border-radius: 30px; /* Hap şeklinde şık bir arka plan */
+    border: 1px solid #e2ebd5;
+}
+
+.welcome-text {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+/* GİRİŞ YAP BUTONU */
+.nav-btn.login-btn {
+    background: #2e7d32;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.nav-btn.login-btn:hover {
+    background: #1b5e20;
+    transform: translateY(-1px);
+}
+
+/* YENİ ŞIK ÇIKIŞ YAP BUTONU */
+.logout-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+    transform: translateY(-1px);
+}
+

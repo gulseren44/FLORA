@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Siparişiniz Alındı</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .success-icon {
+            font-size: 64px;
+            color: #7C8E6C;
+            margin-bottom: 24px;
+            animation: scaleIn 0.5s ease-out;
+        }
+        .success-title {
+            font-family: serif;
+            font-size: 32px;
+            color: #2C3E2B;
+            margin-bottom: 16px;
+        }
+        .success-message {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .order-number-box {
+            background-color: #F7F9F6;
+            border: 1px solid #E2E8E1;
+            padding: 16px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+        .order-number-box span {
+            color: #888;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .order-number-box strong {
+            color: #2C3E2B;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+        .btn-home {
+            display: inline-block;
+            background-color: #2C3E2B;
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .btn-home:hover {
+            background-color: #3D543C;
+        }
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar container">
+        <a href="index.html" class="logo">FLORA</a>
+    </header>
+
+    <main class="container success-container">
+        <div class="success-icon">🌿</div>
+        <h1 class="success-title">Siparişiniz Alındı!</h1>
+        <p class="success-message">
+            Bitkilerinizin hazırlık sürecini başlattık. Doğru ışık ve sevgiyle paketleyip, en kısa sürede kapınıza ulaştırmak üzere yola çıkaracağız. E-posta adresinize bir bilgilendirme gönderdik.
+        </p>
+
+        <div class="order-number-box">
+            <span>SİPARİŞ NUMARANIZ</span>
+            <strong id="display-order-id">#00000</strong>
+        </div>
+
+        <div>
+            <a href="index.html" class="btn-home">ALIŞVERİŞE DEVAM ET</a>
+        </div>
+    </main>
+
+    <script>
+        // URL'den sipariş ID'sini çekip ekrana dinamik yazdırıyoruz
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get("orderId");
+            if (orderId) {
+                document.getElementById("display-order-id").innerText = `#${orderId}`;
+            }
+        });
+    </script>
+</body>
+</html>

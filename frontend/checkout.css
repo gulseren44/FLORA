@@ -1,0 +1,126 @@
+.checkout-container {
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.checkout-layout {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.checkout-form-side {
+    flex: 1.8;
+}
+
+.checkout-form-side h2 {
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: var(--button-dark);
+}
+
+.form-section {
+    margin-bottom: 35px;
+}
+
+.form-section h3 {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Tasarımdaki Minimalist Çizgisel Input Yapısı */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-section input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-section input:focus {
+    border-color: var(--primary);
+}
+
+/* Sağ Panel: Ödeme Özeti */
+.checkout-summary-side {
+    flex: 1.2;
+    position: sticky;
+    top: 100px;
+}
+
+.order-summary-box {
+    background-color: #FFFFFF;
+    border: 1px solid #F0F2EE;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.order-summary-box h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+}
+
+.checkout-items-preview {
+    max-height: 180px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.preview-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.summary-divider {
+    border: 0;
+    border-top: 1px solid #F0F2EE;
+    margin: 15px 0;
+}
+
+.total-row {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-main);
+}
+
+.btn-submit-order {
+    width: 100%;
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}

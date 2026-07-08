@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Ürün Detayı</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+
+    <header class="navbar container">
+        <a href="index.html" class="logo">FLORA</a>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>
+        </nav>
+        <div class="nav-icons">
+            <span onclick="window.location.href='cart.html'" style="cursor:pointer;">🛒<mark class="cart-badge" id="global-cart-count">0</mark></span>
+        </div>
+    </header>
+
+    <main class="container detail-container">
+        <a href="index.html" class="back-link">← Koleksiyona Dön</a>
+
+        <div class="detail-wrapper">
+            <div class="product-image-side">
+                <span class="top-badge">En Çok Tercih Edilen</span>
+                <img src="images/lirata.jpg" alt="Bitki Görseli" id="detail-image">
+            </div>
+
+            <div class="product-info-side">
+                <div class="tags">
+                    <span class="tag" id="detail-category-tag">İç Mekan</span>
+                    <span class="tag">Kolay Bakım</span>
+                </div>
+                
+                <h1 id="detail-title">Yükleniyor...</h1>
+                <p class="sub-title-italic"><i id="detail-scientific-name">...</i></p>
+                
+                <div class="price-stock">
+                    <span class="price" id="detail-price">₺0.00</span>
+                    <span class="stock-status">STOKTA MEVCUT</span>
+                </div>
+
+                <div class="about-section">
+                    <h3>HAKKINDA</h3>
+                    <p id="detail-desc">Ürün açıklaması backend'den yükleniyor...</p>
+                </div>
+
+                <div class="care-icons-grid">
+                    <div class="care-item">
+                        <span class="care-icon">☀️</span>
+                        <span class="care-text">DOLAYLI IŞIK</span>
+                    </div>
+                    <div class="care-item">
+                        <span class="care-icon">💧</span>
+                        <span class="care-text">HAFTALIK SU</span>
+                    </div>
+                    <div class="care-item">
+                        <span class="care-icon">🌡️</span>
+                        <span class="care-text">18°C - 24°C</span>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <div class="quantity-counter">
+                        <button id="decrease-qty">-</button>
+                        <span id="qty-value">1</span>
+                        <button id="increase-qty">+</button>
+                    </div>
+                    <button class="btn-dark btn-add-to-cart" id="add-to-cart-btn">🛒 SEPETE EKLE</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="detail.js"></script>
+</body>
+</html>

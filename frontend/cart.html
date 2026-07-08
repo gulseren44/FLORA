@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Sepetim</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+    <header class="navbar container">
+        <a href="index.html" class="logo">FLORA</a>
+        <nav>
+            <a href="index.html">Ana Sayfa</a>         
+        </nav>
+        <div class="nav-icons">          
+            <span onclick="window.location.href='cart.html'" style="cursor:pointer;">🛒<mark class="cart-badge" id="global-cart-count">0</mark></span>
+        </div>
+    </header>
+
+    <main class="container cart-page-container">
+        <h1 class="page-title">Sepetim</h1>
+
+        <div class="cart-layout">
+            <div class="cart-items-list" id="cart-page-items">
+                <p style="padding: 20px;">Sepetiniz yükleniyor...</p>
+            </div>
+
+            <div class="order-summary-panel">
+                <h2>Sipariş Özeti</h2>
+                <div class="summary-row">
+                    <span>Ara Toplam</span>
+                    <span id="summary-subtotal">₺0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Kargo</span>
+                    <span class="free-shipping">Ücretsiz</span>
+                </div>
+                <hr class="summary-divider">
+                <div class="summary-row total-row">
+                    <span>Toplam</span>
+                    <span id="summary-total">₺0.00</span>
+                </div>
+
+                <button class="btn-dark btn-checkout" onclick="window.location.href='checkout.html'">ÖDEMEYE GEÇ</button>
+
+                <div class="security-info">
+                    <p>🛡️ Güvenli Ödeme Altyapısı</p>
+                    <p>📦 Özel Bitki Ambalajı & Hızlı Teslimat</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="continue-shopping">← Alışverişe Devam Et</a>
+    </main>
+
+    <script src="cart.js"></script>
+</body>
+</html>

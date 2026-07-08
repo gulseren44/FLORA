@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flora - Giriş Yap & Kayıt Ol</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="auth-container" style="max-width: 400px; margin: 100px auto; padding: 20px; font-family: sans-serif;">
+        
+        <div class="auth-box" id="login-box">
+            <h2>Flora'ya Giriş Yap</h2>
+            <form id="login-form">
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="login-email" style="display:block; margin-bottom:5px;">E-posta</label>
+                    <input type="email" id="login-email" required placeholder="ornek@flora.com" style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label for="login-password" style="display:block; margin-bottom:5px;">Şifre</label>
+                    <input type="password" id="login-password" required placeholder="••••••••" style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <button type="submit" class="btn-auth" style="width:100%; padding:10px; background:#2e7d32; color:white; border:none; cursor:pointer;">Giriş Yap</button>
+            </form>
+            <p class="auth-switch" style="margin-top:15px; text-align:center;">Hesabın yok mu? <a href="#" id="go-to-register" style="color:#2e7d32;">Kayıt Ol</a></p>
+        </div>
+
+        <div class="auth-box" id="register-box" style="display: none;">
+            <h2>Flora Dünyasına Katıl</h2>
+            <form id="register-form">
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="reg-name" style="display:block; margin-bottom:5px;">Ad Soyad</label>
+                    <input type="text" id="reg-name" required placeholder="Gülseren Gülse" style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <div class="input-group" style="margin-bottom: 15px;">
+                    <label for="reg-email" style="display:block; margin-bottom:5px;">E-posta</label>
+                    <input type="email" id="reg-email" required placeholder="ornek@flora.com" style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label for="reg-password" style="display:block; margin-bottom:5px;">Şifre</label>
+                    <input type="password" id="reg-password" required placeholder="••••••••" style="width:100%; padding:8px; box-sizing:border-box;">
+                </div>
+                <button type="submit" class="btn-auth" style="width:100%; padding:10px; background:#2e7d32; color:white; border:none; cursor:pointer;">Kayıt Ol</button>
+            </form>
+            <p class="auth-switch" style="margin-top:15px; text-align:center;">Zaten üye misin? <a href="#" id="go-to-login" style="color:#2e7d32;">Giriş Yap</a></p>
+        </div>
+
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
