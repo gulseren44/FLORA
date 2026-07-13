@@ -2,13 +2,17 @@ package com.flora.backend.controller;
 
 import com.flora.backend.model.Product;
 import com.flora.backend.service.ProductService;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Gauge;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 @RequestMapping("/api/products")
@@ -17,82 +21,134 @@ import java.util.Map;
 public class ProductController {
 
     private final ProductService productService;
+    private final MeterRegistry meterRegistry; // Prometheus kayıt defteri
 
-    // Ürünleri listele veya İsme göre ara: GET http://localhost:8085/api/products veya GET http://localhost:8085/api/products?search=Lavanta
+    // 1. Havada asılı duran anlık istek sayısını tutacak thread-safe değişken
+    private final AtomicInteger activeRequests = new AtomicInteger(0);
+
+    // 2. Uygulama ayağa kalkarken bu değişkeni Prometheus'a "Gauge" olarak kaydediyoruz
+    @PostConstruct
+    public void initGauge() {
+        Gauge.builder("http_server_requests_in_progress", activeRequests, AtomicInteger::get)
+             .description("Anlık olarak işlenen aktif istek sayısı")
+             .register(meterRegistry);
+    }
+
+    // Ürünleri listele veya İsme göre ara: GET http://localhost:8085/api/products
     @GetMapping
     public List<Product> getAllProducts(@RequestParam(required = false) String search) {
-        if (search != null && !search.trim().isEmpty()) {
-            return productService.searchProducts(search);
+        activeRequests.incrementAndGet(); // Aktif istek sayısını 1 arttır
+        try {
+            // Dinamik Etiketleme: İstek geldiğinde çalışır ve durum kodu başarılı (200) kabul edilir.
+            meterRegistry.counter("http_server_requests", "uri", "/api/products", "method", "GET", "status", "200").increment();
+            
+            if (search != null && !search.trim().isEmpty()) {
+                return productService.searchProducts(search);
+            }
+            return productService.getAllProducts();
+        } finally {
+            activeRequests.decrementAndGet(); // İstek yanıtlandığında sayıyı 1 azalt
         }
-        return productService.getAllProducts();
     }
 
     // Kategoriye göre filtrele: GET http://localhost:8085/api/products/category/{id}
     @GetMapping("/category/{categoryId}")
     public List<Product> getProductsByCategory(@PathVariable Long categoryId) {
-        return productService.getProductsByCategory(categoryId);
+        activeRequests.incrementAndGet();
+        try {
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/category/{id}", "method", "GET", "status", "200").increment();
+            return productService.getProductsByCategory(categoryId);
+        } finally {
+            activeRequests.decrementAndGet();
+        }
     }
 
     // Sadece favorileri getir: GET http://localhost:8085/api/products/favorites
     @GetMapping("/favorites")
     public List<Product> getFavoriteProducts() {
-        return productService.getFavoriteProducts();
+        activeRequests.incrementAndGet();
+        try {
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/favorites", "method", "GET", "status", "200").increment();
+            return productService.getFavoriteProducts();
+        } finally {
+            activeRequests.decrementAndGet();
+        }
     }
 
     // Yeni Ürün Ekleme Endpoint'i: POST /api/products
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-     try {
-        // Service katmanındaki save metodunu çağırıyoruz
-        Product savedProduct = productService.save(product); 
-        return ResponseEntity.ok(savedProduct);
-     } catch (Exception e) {
-        return ResponseEntity.badRequest().build();
-     }
+        activeRequests.incrementAndGet();
+        try {
+            Product savedProduct = productService.save(product); 
+            // Başarılı kayıtta 200 etiketiyle sayacı arttır
+            meterRegistry.counter("http_server_requests", "uri", "/api/products", "method", "POST", "status", "200").increment();
+            return ResponseEntity.ok(savedProduct);
+        } catch (Exception e) {
+            // Hata durumunda 400 etiketiyle sayacı arttır
+            meterRegistry.counter("http_server_requests", "uri", "/api/products", "method", "POST", "status", "400").increment();
+            return ResponseEntity.badRequest().build();
+        } finally {
+            activeRequests.decrementAndGet();
+        }
     }
 
     // Ürün Silme Endpoint'i: DELETE /api/products/1
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long id) {
-      try {
-        productService.deleteById(id); // Service katmanındaki silme metodunu çağırıyoruz
-        return ResponseEntity.ok(Map.of("message", "Ürün başarıyla silindi."));
-      } catch (Exception e) {
-        return ResponseEntity.badRequest().body(Map.of("message", "Ürün silinirken bir hata oluştu."));
-      }
+        activeRequests.incrementAndGet();
+        try {
+            productService.deleteById(id); 
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/{id}", "method", "DELETE", "status", "200").increment();
+            return ResponseEntity.ok(Map.of("message", "Ürün başarıyla silindi."));
+        } catch (Exception e) {
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/{id}", "method", "DELETE", "status", "400").increment();
+            return ResponseEntity.badRequest().body(Map.of("message", "Ürün silinirken bir hata oluştu."));
+        } finally {
+            activeRequests.decrementAndGet();
+        }
     }
 
     // Ürün Güncelleme Endpoint'i: PUT /api/products/1
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
-      try {
-        // Service katmanından güncellenecek ürünü buluyoruz
-        Product existingProduct = productService.findById(id); // Varsa findById metodun
-        if (existingProduct == null) {
-            return ResponseEntity.notFound().build();
-        }
+        activeRequests.incrementAndGet();
+        try {
+            Product existingProduct = productService.findById(id); 
+            if (existingProduct == null) {
+                meterRegistry.counter("http_server_requests", "uri", "/api/products/{id}", "method", "PUT", "status", "404").increment();
+                return ResponseEntity.notFound().build();
+            }
 
-        // Bilgileri yeni gelen verilerle güncelliyoruz
-        existingProduct.setName(updatedProduct.getName());
-        existingProduct.setScientificName(updatedProduct.getScientificName());
-        existingProduct.setPrice(updatedProduct.getPrice());
-        existingProduct.setImageUrl(updatedProduct.getImageUrl());
-        existingProduct.setDescription(updatedProduct.getDescription());
-        if (updatedProduct.getCategory() != null) {
-            existingProduct.setCategory(updatedProduct.getCategory());
-        }
+            existingProduct.setName(updatedProduct.getName());
+            existingProduct.setScientificName(updatedProduct.getScientificName());
+            existingProduct.setPrice(updatedProduct.getPrice());
+            existingProduct.setImageUrl(updatedProduct.getImageUrl());
+            existingProduct.setDescription(updatedProduct.getDescription());
+            if (updatedProduct.getCategory() != null) {
+                existingProduct.setCategory(updatedProduct.getCategory());
+            }
 
-        // Güncellenmiş halini veritabanına kaydediyoruz
-        Product savedProduct = productService.save(existingProduct);
-        return ResponseEntity.ok(savedProduct);
-     } catch (Exception e) {
-        return ResponseEntity.badRequest().body("{\"message\": \"Ürün güncellenirken bir hata oluştu.\"}");
-     }
-   }
+            Product savedProduct = productService.save(existingProduct);
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/{id}", "method", "PUT", "status", "200").increment();
+            return ResponseEntity.ok(savedProduct);
+        } catch (Exception e) {
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/{id}", "method", "PUT", "status", "400").increment();
+            return ResponseEntity.badRequest().body("{\"message\": \"Ürün güncellenirken bir hata oluştu.\"}");
+        } finally {
+            activeRequests.decrementAndGet();
+        }
+    }
     
     // Tek bir ürünün detayını getir: GET http://127.0.0.1:8085/api/products/{id}
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+        activeRequests.incrementAndGet();
+        try {
+            meterRegistry.counter("http_server_requests", "uri", "/api/products/{id}", "method", "GET", "status", "200").increment();
+            return productService.getProductById(id);
+        } finally {
+            activeRequests.decrementAndGet();
+        }
     }
 }
